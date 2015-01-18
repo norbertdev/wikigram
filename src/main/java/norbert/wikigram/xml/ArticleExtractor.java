@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ public class ArticleExtractor {
 	 * @param is input stream to read
 	 * @param writer writer to write
 	 */
-	public ArticleExtractor(InputStream is, Writer writer) {
+	public static void extract(InputStream is, Writer writer) {
 		// create SAX stream
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
