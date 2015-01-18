@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ public class NgramGenerator {
 			LoopingIndex currentIndex = new LoopingIndex(startIndex);
 			StringBuffer s = new StringBuffer();
 			for (int i = 0; i < length; i++) {
-				s.append(currentTuple[currentIndex.getIndex()]);
+				s.append(currentTuple[currentIndex.getValue()]);
 				currentIndex.next();
 			}
 			return s.toString();
@@ -81,7 +81,7 @@ public class NgramGenerator {
 		} else {
 			size++;
 		}
-		currentTuple[endIndex.getIndex()] = c;
+		currentTuple[endIndex.getValue()] = c;
 		endIndex.next();
 	}
 

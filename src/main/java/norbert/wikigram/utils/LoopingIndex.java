@@ -26,7 +26,7 @@ package norbert.wikigram.utils;
  */
 public class LoopingIndex {
 	private static final int DEFAULT_LENGTH = 3;
-	private int current;
+	private int value;
 	private final int length;
 
 	/**
@@ -48,7 +48,7 @@ public class LoopingIndex {
 			throw new IllegalArgumentException("The length of a looping index must be greater than 0.");
 		}
 
-		current = 0;
+		value = 0;
 		this.length = length;
 	}
 
@@ -58,7 +58,7 @@ public class LoopingIndex {
 	 * @param index base index  
 	 */
 	public LoopingIndex(LoopingIndex index) {
-		current = index.current;
+		value = index.value;
 		length = index.length;
 	}
 
@@ -67,8 +67,8 @@ public class LoopingIndex {
 	 * 
 	 * @return the current value
 	 */
-	public int getIndex() {
-		return current;
+	public int getValue() {
+		return value;
 	}
 
 	/**
@@ -77,9 +77,9 @@ public class LoopingIndex {
 	 * The value is set to <code>0</code> only if the incremented old value exceed the allowed range.
 	 */
 	public void next() {
-		current++;
-		if (current == length) {
-			current = 0;
+		value++;
+		if (value == length) {
+			value = 0;
 		}
 	}
 
@@ -87,6 +87,6 @@ public class LoopingIndex {
 	 * Sets the current value to 0.
 	 */
 	public void reset() {
-		current = 0;
+		value = 0;
 	}
 }
