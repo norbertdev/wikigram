@@ -20,6 +20,13 @@ package norbert.wikigram.counter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * This writer counts the ngrams that go through it.
+ * 
+ * For example, for ngrams of length 3,  "ananas" results in "ana=2", "nan=1" and "nas=1".
+ * 
+ * It also provides a command line UI that shows the current ngrams and some statistics.
+ */
 public class NgramCounterWriter extends Writer {
 	private int articleCounter;
 	private final NgramCounter counter;

@@ -21,6 +21,9 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * This writer lowers each character that goes through it. The {@link java.lang.Character#toLowerCase(char)} method is used.
+ */
 public class ToLowerLetterWriter extends FilterWriter {
 	public ToLowerLetterWriter(Writer out) {
 		super(out);

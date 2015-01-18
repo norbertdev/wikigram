@@ -21,6 +21,11 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * This writer removes the redirections that go through it.
+ * 
+ * A redirection is detected by the "#redirect" string after a flush, or at the start.
+ */
 public class RedirectionRemoverWriter extends FilterWriter {
 	private static final String REDIRECTION_STRING = "#redirect";
 	private static final int BUFFER_CAPACITY = REDIRECTION_STRING.length();
@@ -61,6 +66,9 @@ public class RedirectionRemoverWriter extends FilterWriter {
 				}
 			}
 		}
+		// FIXME: if len < BUFFER_CAPACITY, the cbuf might not be passed to the next writer
+		// for example: write("abc"); write("defghijklmn"); will only output "defghijklmn"
+		// the buffer must also be written
 		if (canWrite) {
 			out.write(cbuf, off, len);
 		}

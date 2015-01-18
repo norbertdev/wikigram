@@ -35,6 +35,11 @@ import norbert.wikigram.xml.ArticleExtractor;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 
+/**
+ * This class provides a main method that compute the number of ngrams from a XML dump of Wikipedia.
+ * 
+ * It only takes articles in account, thus ignore templates, discussion pages…
+ */
 public class WikiGram {
 	public static void count(String filename) throws FileNotFoundException {
 		FileInputStream fileStream = null;

@@ -19,6 +19,11 @@ package norbert.wikigram.filter;
 
 import java.io.Writer;
 
+/**
+ * This writer removes the links that go through it.
+ * 
+ * For this class, a link is every character between the char "[" and the char "]". Thus, this writer may remove text that are not part of a link.
+ */
 public class LinkRemoverWriter extends EnclosedCharRemoverWriter {
 	private static final char CLOSING_TEMPLATE_CHAR = ']';
 	private static final char OPENING_TEMPLATE_CHAR = '[';

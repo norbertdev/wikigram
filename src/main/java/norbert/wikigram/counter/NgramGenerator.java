@@ -19,6 +19,15 @@ package norbert.wikigram.counter;
 
 import norbert.wikigram.utils.LoopingIndex;
 
+/**
+ * This class provides a transformation from several ordered characters to strings of a determined length.
+ * 
+ * The characters are added one by one, via the {@link #putChar(char)} method. The string is retrieved by the {@link #getString()} method. The number of characted is given to the constructor.
+ * 
+ * In the initial state, the string is empty. A generator is in the initial state after the constructor call, and after the call of the {@link #reset()} method.
+ * 
+ * For example, for a length of 2, putting 'a', 'b' and 'c' results in "bc".
+ */
 public class NgramGenerator {
 	private static final int DEFAULT_LENGTH = 3;
 	private final char[] currentTuple;
@@ -31,6 +40,11 @@ public class NgramGenerator {
 		this(DEFAULT_LENGTH);
 	}
 
+	/**
+	 * Constructs a generator that will generate string of the given number of characters.
+	 * 
+	 * @param length number of character 
+	 */
 	public NgramGenerator(int length) {
 		endIndex = new LoopingIndex(length);
 		startIndex = new LoopingIndex(length);
@@ -39,6 +53,15 @@ public class NgramGenerator {
 		this.length = length;
 	}
 
+	/**
+	 * Returns a string composed of the last characters put in the generator. If not enough characters were inserted before, <code>null</code> is returned.
+	 * 
+	 * The returned strings always contain the same number of characters. This number is given to the constructor.
+	 * 
+	 * The insertion order is preserved: for a length of 3, <code>putChar('a'); putChar('b'); putChar('c');</code> results in the "abc" string.
+	 * 
+	 * @return string of the previous inserted character, or null.
+	 */
 	public String getString() {
 		if (size == length) {
 			LoopingIndex currentIndex = new LoopingIndex(startIndex);

@@ -28,6 +28,11 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+/**
+ * This class is intended to be used by a SAX engine. It provides an XML handler that extracts the articles and write their content to a given {@link java.io.Writer}.
+ * 
+ * The writer is {@link java.io.Writer#flush() flushed} at the end of each article. 
+ */
 public class ArticleContentHandler implements ContentHandler {
 	private static final String ARTICLES_ATTRIBUTE_VALUE = "0";
 	private static final String KEY_ATTRIBUTE_NAME = "key";

@@ -23,6 +23,13 @@ import java.io.Writer;
 
 import norbert.wikigram.utils.FrenchAlphabet;
 
+/**
+ * This writer removes all but the words.
+ * 
+ * Each character that is not part of an alphabet is removed. Two words are separated by a space. For example, it converts "a1   bc2d" to "a bc d".
+ * 
+ * TODO: the alphabet must be given to the constructor. Currently, only lowercase letters from the French alphabet are accepted.
+ */
 public class OnlyWordFilterWriter extends FilterWriter {
 	private boolean precedingCharIsALetter;
 

@@ -17,29 +17,59 @@
  */
 package norbert.wikigram.utils;
 
+/**
+ * This class provides a number that always stays in a given range.
+ * 
+ * This class is intended to be use as an index that goes from <code>0</code> to a given length. This index is incremented at each step by the {@link #next()} method. If the index reaches the maximum allowed value, then the next step will lower the index to 0.
+ * 
+ * The index can be lowered to 0 by calling the {@link #reset()} method.
+ */
 public class LoopingIndex {
 	private static final int DEFAULT_LENGTH = 3;
 	private int current;
 	private final int length;
 
+	/**
+	 * Constructs an index that goes from <code>0</code> to a default value. The first value is <code>0</code>.
+	 */
 	public LoopingIndex() {
 		this(DEFAULT_LENGTH);
 	}
 
+	/**
+	 * Constructs an index that goes from <code>0</code> to <code>lenght-1</code>. The first value is <code>0</code>.
+	 * 
+	 * @param length the length allowed for the created index.
+	 */
 	public LoopingIndex(int length) {
 		current = 0;
 		this.length = length;
 	}
 
+	/**
+	 * Constructs an index based on another index: it will get the same length and the same current value.
+	 * 
+	 * @param index base index  
+	 */
 	public LoopingIndex(LoopingIndex index) {
 		current = index.current;
 		length = index.length;
 	}
 
+	/**
+	 * Returns the current value of the index. The returned value is always in the range [0, length-1].
+	 * 
+	 * @return the current value
+	 */
 	public int getIndex() {
 		return current;
 	}
 
+	/**
+	 * Increments the index value by <code>1</code> or sets the value to <code>0</code>.
+	 * 
+	 * The value is set to <code>0</code> only if the incremented old value exceed the allowed range.
+	 */
 	public void next() {
 		current++;
 		if (current == length) {
@@ -47,7 +77,9 @@ public class LoopingIndex {
 		}
 	}
 
-	//FIXME: useless?
+	/**
+	 * Sets the current value to 0.
+	 */
 	public void reset() {
 		current = 0;
 	}

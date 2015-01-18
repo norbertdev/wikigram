@@ -22,7 +22,19 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+/**
+ * This class maintains a collection of ngrams sorted by frequency.
+ * 
+ * The only method to add a ngram is {@link #update(String, Integer)}. The only method to get the ngrams is {@link #getMostFrequentNgrams()}.
+ */
 public class NgramsByFrenquencies {
+	/**
+	 * This class provides a string (a ngram) and a number attached to it (a frequency).
+	 * 
+	 * The order is first based on the frequency. If the frequencies are equals, then the order is the String order of the ngrams.
+	 * 
+	 * Two ngrams are equals if their texts are equals. 
+	 */
 	private class NgramAndFrequency implements Comparable<NgramAndFrequency> {
 		private final int frequency;
 		private final String ngram;
@@ -72,12 +84,24 @@ public class NgramsByFrenquencies {
 		this(DEFAULT_MAX_SIZE);
 	}
 
+	/**
+	 * Constructs a set of ngrams that can hold the given number of element at most.
+	 * 
+	 * @param maximumSize maximum number of elements to hold
+	 */
 	public NgramsByFrenquencies(int maximumSize) {
 		sortedNgrams = new TreeSet<NgramAndFrequency>();
 		sortedNgrams.add(new NgramAndFrequency("dummytuple", -1));
 		this.maximumSize = maximumSize;
 	}
 
+	/**
+	 * Returns a list of the ngrams, the list is ordered by frequencies. If two frequencies are equals, they are ordered by alphabetical order.
+	 * 
+	 * The first ngram of the list is the most frequent. The last ngram of the list is the less frequent.
+	 * 
+	 * @return the ngrams ordered by frequency
+	 */
 	public List<String> getMostFrequentNgrams() {
 		List<String> list = new ArrayList<String>();
 		for (NgramAndFrequency ft : sortedNgrams.descendingSet()) {
@@ -86,6 +110,12 @@ public class NgramsByFrenquencies {
 		return list;
 	}
 
+	/**
+	 * Updates a ngrams already contains, or adds it.
+	 * 
+	 * @param s the ngram to add
+	 * @param currentNumber the frequency of the ngram
+	 */
 	public void update(String s, Integer currentNumber) {
 		if (sortedNgrams.first().getFrequency() < currentNumber) {
 			NgramAndFrequency newFrequencyNgram = new NgramAndFrequency(s, currentNumber);

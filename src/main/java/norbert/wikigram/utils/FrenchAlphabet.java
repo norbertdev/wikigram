@@ -21,12 +21,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * This class represents the French alphabet.
+ */
 public class FrenchAlphabet {
 	private static final Character alphabetArray[] = { 'a', 'à', 'â', 'æ', 'b', 'c', 'ç', 'd', 'e', 'é',
 			'è', 'ê', 'ë', 'f', 'g', 'h', 'i', 'î', 'ï', 'j', 'k', 'l', 'm', 'n', 'o', 'ô', 'œ', 'p',
 			'q', 'r', 's', 't', 'u', 'ù', 'û', 'ü', 'v', 'w', 'x', 'y', 'ÿ', 'z' };
 	private static final Collection<Character> alphabet = new HashSet<Character>(Arrays.asList(alphabetArray));
 
+	/**
+	 * Returns <code>true</code> if the given character belongs to the French alphabet, <code>false</code> otherwise.
+	 * 
+	 * @param c a character to test
+	 * @return <code>true</code> if the given character belongs to the French alphabet, <code>false</code> otherwise.
+	 */
 	public static boolean isLowerLetter(char c) {
 		return alphabet.contains(c);
 	}

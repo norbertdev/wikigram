@@ -21,6 +21,11 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * This writer removes the text enclosed by two characters.
+ * 
+ * For example, if '(' and ')' are the given characters, it converts "a((b)c)d" to "ad". 
+ */
 public class EnclosedCharRemoverWriter extends FilterWriter {
 	private final char closingChar;
 	private final char openingChar;

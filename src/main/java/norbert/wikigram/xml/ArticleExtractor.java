@@ -26,7 +26,16 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+/**
+ * This class provides a parsing mechanism that extracts the articles from an input stream, and writes them in a given writer.
+ */
 public class ArticleExtractor {
+	/**
+	 * Extracts the articles from the given input stream, and writes them to the given writer.
+	 * 
+	 * @param is input stream to read
+	 * @param writer writer to write
+	 */
 	public ArticleExtractor(InputStream is, Writer writer) {
 		// create SAX stream
 		try {
