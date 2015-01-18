@@ -46,12 +46,12 @@ public class NgramCounter {
 	 * @return ngrams ordered by frequency.
 	 */
 	public synchronized List<String> getMostFrequent() {
-		NgramsByFrequency mft = new NgramsByFrequency();
+		NgramsByFrequency nbf = new NgramsByFrequency();
 		for (Entry<String, Integer> numberOfTuple : numberOfNgrams.entrySet()) {
-			mft.update(numberOfTuple.getKey(), numberOfTuple.getValue());
+			nbf.update(numberOfTuple.getKey(), numberOfTuple.getValue());
 		}
 
-		return mft.getMostFrequentNgrams();
+		return nbf.getMostFrequentNgrams();
 	}
 
 	/**

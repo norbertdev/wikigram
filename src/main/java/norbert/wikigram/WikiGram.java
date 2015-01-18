@@ -21,7 +21,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.io.Writer;
 
 import norbert.wikigram.counter.NgramCounterWriter;
@@ -96,41 +95,6 @@ public class WikiGram {
 				WikiGram.count(filename);
 			} catch (FileNotFoundException e) {
 				System.err.println("Unable to find the given Wikipedia dump: " + filename);
-			}
-		}
-	}
-
-	public static void testInputStreamOutputStream(String filename) {
-		FileInputStream fileStream = null;
-		BZip2CompressorInputStream decompressorStream = null;
-		BufferedInputStream bufferedStream = null;
-		InputStreamReader reader = null;
-		try {
-			int buffersize = 2048;
-			fileStream = new FileInputStream(filename);
-			bufferedStream = new BufferedInputStream(fileStream);
-			decompressorStream = new BZip2CompressorInputStream(bufferedStream);
-			reader = new InputStreamReader(decompressorStream, "UTF8");
-
-			final char[] buffer = new char[buffersize];
-			for (int i = 0; i < 3; i++) {
-				reader.read(buffer);
-				for (char b : buffer) {
-					System.out.print(b);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (decompressorStream != null) {
-					decompressorStream.close();
-				}
-				if (fileStream != null) {
-					fileStream.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
 			}
 		}
 	}
