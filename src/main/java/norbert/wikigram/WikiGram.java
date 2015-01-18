@@ -67,8 +67,7 @@ public class WikiGram {
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("An error occurred while processing the Wikipedia dump.");
 		} finally {
 			try {
 				if (fileStream != null) {
@@ -81,23 +80,20 @@ public class WikiGram {
 					decompressorStream.close();
 				}
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				System.err.println("An error occurred while trying to stop the processing.");
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			System.err.println("Usage:\ntrigram [filename]");
+			System.err.println("The filepath of a Wikipedia dump is missing.");
 		} else {
 			String filename = args[0];
 			try {
 				WikiGram.count(filename);
 			} catch (FileNotFoundException e) {
-				System.err.println(e);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("Unable to find the given Wikipedia dump: " + filename);
 			}
 		}
 	}
