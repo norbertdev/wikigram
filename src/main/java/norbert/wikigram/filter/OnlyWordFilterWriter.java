@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  */
 package norbert.wikigram.filter;
 
-import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -30,18 +29,26 @@ import norbert.wikigram.utils.FrenchAlphabet;
  * 
  * TODO: the alphabet must be given to the constructor. Currently, only lowercase letters from the French alphabet are accepted.
  */
-public class OnlyWordFilterWriter extends FilterWriter {
+public class OnlyWordFilterWriter extends Writer {
 	private boolean precedingCharIsALetter;
+	private Writer out;
 
 	public OnlyWordFilterWriter(Writer out) {
-		super(out);
+		this.out = out;
 		precedingCharIsALetter = false;
+	}
+
+	@Override
+	public void close() throws IOException {
+		flush();
+		out.close();
+		
 	}
 
 	@Override
 	public void flush() throws IOException {
 		precedingCharIsALetter = false;
-		super.flush();
+		out.flush();
 	}
 
 	@Override
@@ -64,17 +71,5 @@ public class OnlyWordFilterWriter extends FilterWriter {
 			}
 		}
 		out.write(outputBuffer, 0, outputBufferIndex);
-	}
-
-	@Override
-	public void write(int c) throws IOException {
-		char[] array = new char[1];
-		array[0] = (char) c;
-		write(array, 0, 1);
-	}
-
-	@Override
-	public void write(String str, int off, int len) throws IOException {
-		write(str.toCharArray(), off, len);
 	}
 }

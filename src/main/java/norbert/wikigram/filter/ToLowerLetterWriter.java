@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,16 +17,26 @@
  */
 package norbert.wikigram.filter;
 
-import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
 /**
  * This writer lowers each character that goes through it. The {@link java.lang.Character#toLowerCase(char)} method is used.
  */
-public class ToLowerLetterWriter extends FilterWriter {
+public class ToLowerLetterWriter extends Writer {
+	private Writer out;
 	public ToLowerLetterWriter(Writer out) {
-		super(out);
+		this.out = out;
+	}
+
+	@Override
+	public void close() throws IOException {
+		out.close();
+	}
+
+	@Override
+	public void flush() throws IOException {
+		out.flush();
 	}
 
 	@Override
@@ -37,17 +47,5 @@ public class ToLowerLetterWriter extends FilterWriter {
 			outputBuffer[index] = Character.toLowerCase(cbuf[index]);
 		}
 		out.write(outputBuffer, 0, len);
-	}
-
-	@Override
-	public void write(int c) throws IOException {
-		char[] array = new char[1];
-		array[0] = (char) c;
-		write(array, 0, 1);
-	}
-
-	@Override
-	public void write(String str, int off, int len) throws IOException {
-		write(str.toCharArray(), off, len);
 	}
 }

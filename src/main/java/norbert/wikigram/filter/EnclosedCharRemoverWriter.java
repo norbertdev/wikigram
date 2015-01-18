@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  */
 package norbert.wikigram.filter;
 
-import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -26,13 +25,14 @@ import java.io.Writer;
  * 
  * For example, if '(' and ')' are the given characters, it converts "a((b)c)d" to "ad". 
  */
-public class EnclosedCharRemoverWriter extends FilterWriter {
+public class EnclosedCharRemoverWriter extends Writer {
 	private final char closingChar;
 	private final char openingChar;
+	private Writer out;
 	private int relativeOpeningLinkCounter;
 
 	public EnclosedCharRemoverWriter(Writer out, char openingChar, char closingChar) {
-		super(out);
+		this.out = out;
 
 		this.openingChar = openingChar;
 		this.closingChar = closingChar;
@@ -41,9 +41,15 @@ public class EnclosedCharRemoverWriter extends FilterWriter {
 	}
 
 	@Override
+	public void close() throws IOException {
+		flush();
+		out.close();
+	}
+
+	@Override
 	public void flush() throws IOException {
 		relativeOpeningLinkCounter = 0;
-		super.flush();
+		out.flush();
 	}
 
 	//FIXME: remove this debug method (optimized)
@@ -110,17 +116,6 @@ public class EnclosedCharRemoverWriter extends FilterWriter {
 		out.write(outputBuffer, 0, dstStartingIndex + nbOfCharsToCopy);
 	}
 	*/
-	@Override
-	public void write(int c) throws IOException {
-		char[] array = new char[1];
-		array[0] = (char) c;
-		write(array, 0, 1);
-	}
-
-	@Override
-	public void write(String str, int off, int len) throws IOException {
-		write(str.toCharArray(), off, len);
-	}
 
 	//@Override
 	public void writeOrig(char cbuf[], int off, int len) throws IOException {
@@ -167,5 +162,4 @@ public class EnclosedCharRemoverWriter extends FilterWriter {
 		}
 		out.write(cbuf, off, outputBufferIndex - off);
 	}
-
 }

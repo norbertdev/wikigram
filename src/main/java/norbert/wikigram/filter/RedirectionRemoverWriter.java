@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  */
 package norbert.wikigram.filter;
 
-import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -26,18 +25,25 @@ import java.io.Writer;
  * 
  * A redirection is detected by the "#redirect" string after a flush, or at the start.
  */
-public class RedirectionRemoverWriter extends FilterWriter {
+public class RedirectionRemoverWriter extends Writer {
 	private static final String REDIRECTION_STRING = "#redirect";
 	private static final int BUFFER_CAPACITY = REDIRECTION_STRING.length();
 	private final char[] buffer;
 	private int bufferIndex;
 	private boolean canWrite;
+	private Writer out;
 
 	public RedirectionRemoverWriter(Writer out) {
-		super(out);
+		this.out = out;
 		buffer = new char[BUFFER_CAPACITY];
 		bufferIndex = 0;
 		canWrite = false;
+	}
+
+	@Override
+	public void close() throws IOException {
+		flush();
+		out.close();
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class RedirectionRemoverWriter extends FilterWriter {
 		}
 		bufferIndex = 0;
 		canWrite = false;
-		super.flush();
+		out.flush();
 	}
 
 	@Override
@@ -72,17 +78,5 @@ public class RedirectionRemoverWriter extends FilterWriter {
 		if (canWrite) {
 			out.write(cbuf, off, len);
 		}
-	}
-
-	@Override
-	public void write(int c) throws IOException {
-		char[] array = new char[1];
-		array[0] = (char) c;
-		write(array, 0, 1);
-	}
-
-	@Override
-	public void write(String str, int off, int len) throws IOException {
-		write(str.toCharArray(), off, len);
 	}
 }
