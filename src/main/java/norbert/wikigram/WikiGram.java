@@ -86,8 +86,10 @@ public class WikiGram {
 	}
 
 	public static void main(String[] args) {
-		if (args.length != 1) {
+		if (args.length == 0) {
 			System.err.println("The filepath of a Wikipedia dump is missing.");
+		}else if (1 < args.length){
+			System.err.println("Too much arguments are given. Only a filepath of a Wikipedia dump is required.");
 		} else {
 			String filename = args[0];
 			try {
