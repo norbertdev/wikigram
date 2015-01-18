@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,6 +62,10 @@ public class ArticleContentHandler implements ContentHandler {
 	}
 
 	public ArticleContentHandler(Writer w) {
+		if(w == null){
+			throw new IllegalArgumentException("The writer given to the article content handler is null. It shouldn't.");
+		}
+		
 		writer = w;
 		titleBuffer = CharBuffer.allocate(1024);
 		notAnArticleTitle = new ArrayList<String>();
