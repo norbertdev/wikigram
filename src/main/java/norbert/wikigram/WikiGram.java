@@ -49,7 +49,7 @@ public class WikiGram {
 		try {
 			fileStream = new FileInputStream(filename);
 			bufferedStream = new BufferedInputStream(fileStream, (int) Math.pow(2, 20));
-			decompressorStream = new BZip2CompressorInputStream(bufferedStream);
+			decompressorStream = new BZip2CompressorInputStream(bufferedStream, true);
 
 			Writer ngramCounterWriter = new NgramCounterWriter();
 			Writer onlyWordFilterWriter = new OnlyWordFilterWriter(ngramCounterWriter);
