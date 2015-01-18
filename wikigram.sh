@@ -7,4 +7,4 @@ if [ "${1}" = "" ]; then
 fi
 
 # start the main method
-java -server -cp target/wikigram-2011.12.17-jar-with-dependencies.jar norbert.wikigram.WikiGram ${1}
+java -server -cp target/wikigram-2015.01.18-jar-with-dependencies.jar norbert.wikigram.WikiGram ${1}

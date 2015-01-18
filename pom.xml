@@ -6,7 +6,7 @@
 	<name>WikiGram</name>
 	<artifactId>wikigram</artifactId>
 	<groupId>norbert</groupId>
-	<version>2011.12.17</version>
+	<version>2015.01.18</version>
 	<packaging>jar</packaging>
 
 	<build>
