@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import java.util.TreeSet;
  * 
  * The only method to add a ngram is {@link #update(String, Integer)}. The only method to get the ngrams is {@link #getMostFrequentNgrams()}.
  */
-public class NgramsByFrenquencies {
+public class NgramsByFrequency {
 	/**
 	 * This class provides a string (a ngram) and a number attached to it (a frequency).
 	 * 
@@ -80,7 +80,7 @@ public class NgramsByFrenquencies {
 	private final int maximumSize;
 	private final NavigableSet<NgramAndFrequency> sortedNgrams;
 
-	public NgramsByFrenquencies() {
+	public NgramsByFrequency() {
 		this(DEFAULT_MAX_SIZE);
 	}
 
@@ -89,7 +89,7 @@ public class NgramsByFrenquencies {
 	 * 
 	 * @param maximumSize maximum number of elements to hold
 	 */
-	public NgramsByFrenquencies(int maximumSize) {
+	public NgramsByFrequency(int maximumSize) {
 		sortedNgrams = new TreeSet<NgramAndFrequency>();
 		sortedNgrams.add(new NgramAndFrequency("dummytuple", -1));
 		this.maximumSize = maximumSize;

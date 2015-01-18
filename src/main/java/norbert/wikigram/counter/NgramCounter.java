@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ public class NgramCounter {
 	 * @return ngrams ordered by frequency.
 	 */
 	public synchronized List<String> getMostFrequent() {
-		NgramsByFrenquencies mft = new NgramsByFrenquencies();
+		NgramsByFrequency mft = new NgramsByFrequency();
 		for (Entry<String, Integer> numberOfTuple : numberOfNgrams.entrySet()) {
 			mft.update(numberOfTuple.getKey(), numberOfTuple.getValue());
 		}
