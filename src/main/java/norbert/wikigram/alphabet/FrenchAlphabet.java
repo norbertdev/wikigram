@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with WikiGram. If not, see <http://www.gnu.org/licenses/>.
  */
-package norbert.wikigram.utils;
+package norbert.wikigram.alphabet;
 
 import java.util.Arrays;
 import java.util.Collection;

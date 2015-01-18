@@ -20,7 +20,7 @@ package norbert.wikigram.filter;
 import java.io.IOException;
 import java.io.Writer;
 
-import norbert.wikigram.utils.FrenchAlphabet;
+import norbert.wikigram.alphabet.FrenchAlphabet;
 
 /**
  * This writer removes all but the words.
