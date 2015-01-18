@@ -53,14 +53,6 @@ public class ArticleContentHandler implements ContentHandler {
 
 	private final Writer writer;
 
-	/**
-	 * Do not use.
-	 */
-	@SuppressWarnings("unused")
-	private ArticleContentHandler() {
-		this(null);
-	}
-
 	public ArticleContentHandler(Writer w) {
 		if(w == null){
 			throw new IllegalArgumentException("The writer given to the article content handler is null. It shouldn't.");
