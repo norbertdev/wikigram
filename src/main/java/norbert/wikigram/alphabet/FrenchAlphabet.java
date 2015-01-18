@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,20 +23,25 @@ import java.util.HashSet;
 
 /**
  * This class represents the French alphabet.
+ * 
+ * This alphabet only contains the lower case characters.
  */
-public class FrenchAlphabet {
-	private static final Character alphabetArray[] = { 'a', 'à', 'â', 'æ', 'b', 'c', 'ç', 'd', 'e', 'é',
+public class FrenchAlphabet implements Alphabet {
+	private static final Character ALPHABET_ARRAY[] = { 'a', 'à', 'â', 'æ', 'b', 'c', 'ç', 'd', 'e', 'é',
 			'è', 'ê', 'ë', 'f', 'g', 'h', 'i', 'î', 'ï', 'j', 'k', 'l', 'm', 'n', 'o', 'ô', 'œ', 'p',
 			'q', 'r', 's', 't', 'u', 'ù', 'û', 'ü', 'v', 'w', 'x', 'y', 'ÿ', 'z' };
-	private static final Collection<Character> alphabet = new HashSet<Character>(Arrays.asList(alphabetArray));
+	private static final Collection<Character> ALPHABET = new HashSet<Character>(Arrays.asList(ALPHABET_ARRAY));
 
 	/**
 	 * Returns <code>true</code> if the given character belongs to the French alphabet, <code>false</code> otherwise.
 	 * 
+	 * The alphabet only contains the lower case characters.
+	 * 
 	 * @param c a character to test
 	 * @return <code>true</code> if the given character belongs to the French alphabet, <code>false</code> otherwise.
 	 */
-	public static boolean isLowerLetter(char c) {
-		return alphabet.contains(c);
+	@Override
+	public boolean constains(char c) {
+		return ALPHABET.contains(c);
 	}
 }

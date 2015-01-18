@@ -20,20 +20,20 @@ package norbert.wikigram.filter;
 import java.io.IOException;
 import java.io.Writer;
 
-import norbert.wikigram.alphabet.FrenchAlphabet;
+import norbert.wikigram.alphabet.Alphabet;
 
 /**
  * This writer removes all but the words.
  * 
- * Each character that is not part of an alphabet is removed. Two words are separated by a space. For example, it converts "a1   bc2d" to "a bc d".
- * 
- * TODO: the alphabet must be given to the constructor. Currently, only lowercase letters from the French alphabet are accepted.
+ * Each character that is not part of a given alphabet is removed. Two words are separated by a space. For example, it converts "<a1   !bc2d" to "a bc d".
  */
 public class OnlyWordFilterWriter extends Writer {
+	private Alphabet alphabet;
 	private boolean precedingCharIsALetter;
 	private Writer out;
 
-	public OnlyWordFilterWriter(Writer out) {
+	public OnlyWordFilterWriter(Writer out, Alphabet alphabet) {
+		this.alphabet = alphabet;
 		this.out = out;
 		precedingCharIsALetter = false;
 	}
@@ -58,7 +58,7 @@ public class OnlyWordFilterWriter extends Writer {
 
 		for (int index = off; index < len; index++) {
 			char currentChar = cbuf[index];
-			if (FrenchAlphabet.isLowerLetter(currentChar)) {
+			if (alphabet.constains(currentChar)) {
 				outputBuffer[outputBufferIndex] = currentChar;
 				outputBufferIndex++;
 				precedingCharIsALetter = true;

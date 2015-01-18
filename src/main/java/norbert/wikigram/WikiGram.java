@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Writer;
 
+import norbert.wikigram.alphabet.FrenchAlphabet;
 import norbert.wikigram.counter.NgramCounterWriter;
 import norbert.wikigram.filter.HtmlTagRemoverWriter;
 import norbert.wikigram.filter.LinkRemoverWriter;
@@ -54,7 +55,7 @@ public class WikiGram {
 			decompressorStream = new BZip2CompressorInputStream(bufferedStream, true);
 
 			Writer ngramCounterWriter = new NgramCounterWriter();
-			Writer onlyWordFilterWriter = new OnlyWordFilterWriter(ngramCounterWriter);
+			Writer onlyWordFilterWriter = new OnlyWordFilterWriter(ngramCounterWriter, new FrenchAlphabet());
 			Writer redirectionRemoverWriter = new RedirectionRemoverWriter(onlyWordFilterWriter);
 			Writer toLowerLetterWriter = new ToLowerLetterWriter(redirectionRemoverWriter);
 			Writer htmlTagRemoverWriter = new HtmlTagRemoverWriter(toLowerLetterWriter);
