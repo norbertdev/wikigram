@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,9 +39,15 @@ public class LoopingIndex {
 	/**
 	 * Constructs an index that goes from <code>0</code> to <code>lenght-1</code>. The first value is <code>0</code>.
 	 * 
+	 * The given length must be greater than <code>0</code>.
+	 * 
 	 * @param length the length allowed for the created index.
 	 */
 	public LoopingIndex(int length) {
+		if(length < 0){
+			throw new IllegalArgumentException("The length of a looping index must be greater than 0.");
+		}
+
 		current = 0;
 		this.length = length;
 	}
