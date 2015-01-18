@@ -48,7 +48,7 @@
 		</dependency>
 	</dependencies>
 
-	<description>WikiGram aims to compute the most used trigram in the wikipedia articles.</description>
+	<description>WikiGram aims to compute the most used trigrams in the Wikipedia articles.</description>
 	<url>http://gitorious.org/wikigram</url>
 	<licenses>
 		<license>

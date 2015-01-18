@@ -113,12 +113,12 @@ public class NgramsByFrenquencies {
 	/**
 	 * Updates a ngrams already contains, or adds it.
 	 * 
-	 * @param s the ngram to add
-	 * @param currentNumber the frequency of the ngram
+	 * @param ngram the ngram to add
+	 * @param frequency the frequency of the ngram
 	 */
-	public void update(String s, Integer currentNumber) {
-		if (sortedNgrams.first().getFrequency() < currentNumber) {
-			NgramAndFrequency newFrequencyNgram = new NgramAndFrequency(s, currentNumber);
+	public void update(String ngram, Integer frequency) {
+		if (sortedNgrams.first().getFrequency() < frequency) {
+			NgramAndFrequency newFrequencyNgram = new NgramAndFrequency(ngram, frequency);
 			sortedNgrams.remove(newFrequencyNgram);
 			sortedNgrams.add(newFrequencyNgram);
 			if (maximumSize == sortedNgrams.size()) {

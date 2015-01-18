@@ -83,9 +83,6 @@ public class WikiGram {
 		}
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.err.println("Usage:\ntrigram [filename]");
