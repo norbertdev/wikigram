@@ -13,8 +13,8 @@ Build WikiGram
 * Install Maven (http://maven.apache.org/). Debian example:
 aptitude install maven2
 
-* Build the jar : run Maven in the root directory of the project (the directory containing the file 'pom.xml'):
-mvn package
+* Build the jar with all dependencies by running Maven in the root directory of the project (the directory containing the file 'pom.xml'):
+mvn package assembly:single
 
 
 Download a Wikipedia dump
@@ -26,9 +26,6 @@ wget https://dumps.wikimedia.org/frwiki/latest/frwiki-latest-pages-articles-mult
 
 Start WikiGram
 --------------
-
-* Set the M2_REPO environment variable to Maven repository if necessary. For example:
-M2_REPO="/home/me/.m2/repository"
 
 * Run the script, give the dump as parameter. For example:
 ./wikigram.sh frwiki-latest-pages-articles-multistream.xml.bz2
