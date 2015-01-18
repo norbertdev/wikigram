@@ -1,0 +1,47 @@
+Objective
+=========
+
+WikiGram aims to compute the most used trigrams in the Wikipedia articles.
+
+
+How to start WikiGram?
+======================
+
+Build WikiGram
+--------------
+
+* Install Maven (http://maven.apache.org/). Debian example:
+aptitude install maven2
+
+* Build the jar : run Maven in the root directory of the project (the directory containing the file 'pom.xml'):
+mvn package
+
+
+Download a Wikipedia dump
+-------------------------
+
+* The dumps are downloadable at http://dumps.wikimedia.org/. For example:
+wget http://dumps.wikimedia.org/frwiki/20111214/frwiki-20111214-pages-articles.xml.bz2
+
+
+Start WikiGram
+--------------
+
+* Set the M2_REPO environment variable to Maven repository if necessary. For example:
+M2_REPO="/home/me/.m2/repository"
+
+* Run the script, give the dump as parameter. For example:
+./wikigram.sh frwiki-20111214-pages-articles.xml.bz2
+
+
+License
+=======
+
+See the LICENSE file.
+
+
+Contact
+=======
+
+The online repository can be found at:
+https://github.com/norbertdev/wikigram
