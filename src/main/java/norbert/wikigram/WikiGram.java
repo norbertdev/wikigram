@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,9 @@ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
  * It only takes articles in account, thus ignore templates, discussion pages…
  */
 public class WikiGram {
+	// size of the buffer: 1 mega
+	private final static int BUFFER_SIZE = (int) Math.pow(2, 20);
+
 	public static void count(String filename) throws FileNotFoundException {
 		FileInputStream fileStream = null;
 		BufferedInputStream bufferedStream = null;
@@ -48,7 +51,7 @@ public class WikiGram {
 
 		try {
 			fileStream = new FileInputStream(filename);
-			bufferedStream = new BufferedInputStream(fileStream, (int) Math.pow(2, 20));
+			bufferedStream = new BufferedInputStream(fileStream, BUFFER_SIZE);
 			decompressorStream = new BZip2CompressorInputStream(bufferedStream, true);
 
 			Writer ngramCounterWriter = new NgramCounterWriter();
