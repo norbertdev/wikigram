@@ -1,6 +1,6 @@
 /*
  * This file is part of WikiGram.
- * Copyright 2011 Norbert
+ * Copyright 2011, 2015 Norbert
  * 
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -137,7 +137,9 @@ public class NgramCounterWriter extends Writer {
 
 	@Override
 	public void close() throws IOException {
-		// TODO Stop the thread
+		flush();
+		printSummary();
+		// TODO: the thread must be shut down
 	}
 
 	private void displayUsage() {

@@ -63,6 +63,8 @@ public class WikiGram {
 			Writer bufferWriter = new BufferedWriter(linkRemoverWriter);
 
 			ArticleExtractor.extract(decompressorStream, bufferWriter);
+
+			bufferWriter.close();
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
