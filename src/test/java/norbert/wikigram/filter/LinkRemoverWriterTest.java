@@ -57,9 +57,9 @@ public class LinkRemoverWriterTest {
 			tested.flush();
 			assertTrue(sw.toString().equals(sOut2));
 
+			tested.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail();
 		}
 	}
 
