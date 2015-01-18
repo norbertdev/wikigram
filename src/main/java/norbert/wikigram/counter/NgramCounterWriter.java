@@ -1,17 +1,17 @@
 /*
  * This file is part of WikiGram.
  * Copyright 2011, 2015 Norbert
- * 
+ *
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * WikiGram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with WikiGram. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,10 +22,12 @@ import java.io.Writer;
 
 /**
  * This writer counts the ngrams that go through it.
- * 
- * For example, for ngrams of length 3,  "ananas" results in "ana=2", "nan=1" and "nas=1".
- * 
- * It also provides a command line UI that shows the current ngrams and some statistics.
+ *
+ * For example, for ngrams of length 3, "ananas" results in "ana=2", "nan=1" and
+ * "nas=1".
+ *
+ * It also provides a command line UI that shows the current ngrams and some
+ * statistics.
  */
 public class NgramCounterWriter extends Writer {
 	private int articleCounter;
@@ -75,11 +77,16 @@ public class NgramCounterWriter extends Writer {
 							break;
 
 						case 'h':
-							System.out.println("a: show the number of article processed.");
-							System.out.println("w: show the number of word processed.");
-							System.out.println("l: show the number of letter processed.");
-							System.out.println("d: show a summary of article, word and letter processed, and the most used trigrams.");
-							System.out.println("s: activate or deactivate statistics. Show every 10 seconds the current statistics.");
+							System.out
+									.println("a: show the number of article processed.");
+							System.out
+									.println("w: show the number of word processed.");
+							System.out
+									.println("l: show the number of letter processed.");
+							System.out
+									.println("d: show a summary of article, word and letter processed, and the most used trigrams.");
+							System.out
+									.println("s: activate or deactivate statistics. Show every 10 seconds the current statistics.");
 							System.out.println("h: show this help.");
 							System.out.println("q: quit the program.");
 							break;
@@ -115,11 +122,12 @@ public class NgramCounterWriter extends Writer {
 						Thread.sleep(10000);
 						if (displayStatistics) {
 							System.out.println(iterationNumber + ". "
-									+ "article processed: avg=" + articleCounter / (iterationNumber * 10)
-									+ ", last=" + (articleCounter - lastArticleCounter)
+									+ "article processed: avg="
+									+ articleCounter / (iterationNumber * 10)
+									+ ", last="
+									+ (articleCounter - lastArticleCounter)
 									+ " (total: article=" + articleCounter
-									+ ", word=" + wordCounter
-									+ ")");
+									+ ", word=" + wordCounter + ")");
 							lastArticleCounter = articleCounter;
 						}
 						iterationNumber++;
@@ -154,9 +162,8 @@ public class NgramCounterWriter extends Writer {
 	}
 
 	private void printSummary() {
-		System.out.println("article = " + articleCounter
-				+ ", word = " + wordCounter
-				+ ", letter = " + letterCounter);
+		System.out.println("article = " + articleCounter + ", word = "
+				+ wordCounter + ", letter = " + letterCounter);
 		System.out.println(counter.getMostFrequent());
 	}
 

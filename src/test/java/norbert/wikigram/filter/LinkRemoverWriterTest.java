@@ -6,8 +6,6 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import norbert.wikigram.filter.LinkRemoverWriter;
-
 import org.junit.Test;
 
 public class LinkRemoverWriterTest {
@@ -151,8 +149,7 @@ public class LinkRemoverWriterTest {
 		return sw.toString();
 	}
 
-	private String writeInThreeCall(String s1, String s2,
-			String s3, String s4) {
+	private String writeInThreeCall(String s1, String s2, String s3, String s4) {
 		StringWriter sw = new StringWriter();
 		LinkRemoverWriter tested = new LinkRemoverWriter(sw);
 		try {

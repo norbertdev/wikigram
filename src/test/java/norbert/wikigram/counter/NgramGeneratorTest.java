@@ -2,12 +2,9 @@ package norbert.wikigram.counter;
 
 import static org.junit.Assert.assertTrue;
 
-import norbert.wikigram.counter.NgramGenerator;
-
 import org.junit.Test;
 
 public class NgramGeneratorTest {
-
 	@Test
 	public void testGetString() {
 		NgramGenerator t1 = new NgramGenerator(1);
@@ -74,5 +71,4 @@ public class NgramGeneratorTest {
 		assertTrue(t2.getString().equals("cd"));
 		assertTrue(t3.getString() == null);
 	}
-
 }

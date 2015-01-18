@@ -2,8 +2,6 @@ package norbert.wikigram.utils;
 
 import junit.framework.TestCase;
 
-import norbert.wikigram.utils.LoopingIndex;
-
 import org.junit.Test;
 
 public class LoopingIndexTest extends TestCase {
@@ -59,5 +57,4 @@ public class LoopingIndexTest extends TestCase {
 		assertTrue(li3.getValue() == 0);
 		assertFalse(li3.getValue() == 1);
 	}
-
 }

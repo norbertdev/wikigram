@@ -1,17 +1,17 @@
 /*
  * This file is part of WikiGram.
  * Copyright 2011, 2015 Norbert
- * 
+ *
  * WikiGram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * WikiGram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with WikiGram. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,8 +36,9 @@ import norbert.wikigram.xml.ArticleExtractor;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 
 /**
- * This class provides a main method that compute the number of ngrams from a XML dump of Wikipedia.
- * 
+ * This class provides a main method that compute the number of ngrams from a
+ * XML dump of Wikipedia.
+ *
  * It only takes articles in account, thus ignore templates, discussion pages…
  */
 public class WikiGram {
@@ -52,15 +53,22 @@ public class WikiGram {
 		try {
 			fileStream = new FileInputStream(filename);
 			bufferedStream = new BufferedInputStream(fileStream, BUFFER_SIZE);
-			decompressorStream = new BZip2CompressorInputStream(bufferedStream, true);
+			decompressorStream = new BZip2CompressorInputStream(bufferedStream,
+					true);
 
 			Writer ngramCounterWriter = new NgramCounterWriter();
-			Writer onlyWordFilterWriter = new OnlyWordFilterWriter(ngramCounterWriter, new FrenchAlphabet());
-			Writer redirectionRemoverWriter = new RedirectionRemoverWriter(onlyWordFilterWriter);
-			Writer toLowerLetterWriter = new ToLowerLetterWriter(redirectionRemoverWriter);
-			Writer htmlTagRemoverWriter = new HtmlTagRemoverWriter(toLowerLetterWriter);
-			Writer templateRemoverWriter = new TemplateRemoverWriter(htmlTagRemoverWriter);
-			Writer linkRemoverWriter = new LinkRemoverWriter(templateRemoverWriter);
+			Writer onlyWordFilterWriter = new OnlyWordFilterWriter(
+					ngramCounterWriter, new FrenchAlphabet());
+			Writer redirectionRemoverWriter = new RedirectionRemoverWriter(
+					onlyWordFilterWriter);
+			Writer toLowerLetterWriter = new ToLowerLetterWriter(
+					redirectionRemoverWriter);
+			Writer htmlTagRemoverWriter = new HtmlTagRemoverWriter(
+					toLowerLetterWriter);
+			Writer templateRemoverWriter = new TemplateRemoverWriter(
+					htmlTagRemoverWriter);
+			Writer linkRemoverWriter = new LinkRemoverWriter(
+					templateRemoverWriter);
 			Writer bufferWriter = new BufferedWriter(linkRemoverWriter);
 
 			ArticleExtractor.extract(decompressorStream, bufferWriter);
@@ -69,7 +77,8 @@ public class WikiGram {
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
-			System.err.println("An error occurred while processing the Wikipedia dump.");
+			System.err
+					.println("An error occurred while processing the Wikipedia dump.");
 		} finally {
 			try {
 				if (fileStream != null) {
@@ -82,7 +91,8 @@ public class WikiGram {
 					decompressorStream.close();
 				}
 			} catch (Exception e2) {
-				System.err.println("An error occurred while trying to stop the processing.");
+				System.err
+						.println("An error occurred while trying to stop the processing.");
 			}
 		}
 	}
@@ -90,14 +100,16 @@ public class WikiGram {
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			System.err.println("The filepath of a Wikipedia dump is missing.");
-		}else if (1 < args.length){
-			System.err.println("Too much arguments are given. Only a filepath of a Wikipedia dump is required.");
+		} else if (1 < args.length) {
+			System.err
+					.println("Too much arguments are given. Only a filepath of a Wikipedia dump is required.");
 		} else {
 			String filename = args[0];
 			try {
 				WikiGram.count(filename);
 			} catch (FileNotFoundException e) {
-				System.err.println("Unable to find the given Wikipedia dump: " + filename);
+				System.err.println("Unable to find the given Wikipedia dump: "
+						+ filename);
 			}
 		}
 	}
