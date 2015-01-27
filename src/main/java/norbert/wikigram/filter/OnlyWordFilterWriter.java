@@ -59,7 +59,7 @@ public class OnlyWordFilterWriter extends Writer {
 
 		for (int index = off; index < len; index++) {
 			char currentChar = cbuf[index];
-			if (alphabet.constains(currentChar)) {
+			if (alphabet.contains(currentChar)) {
 				outputBuffer[outputBufferIndex] = currentChar;
 				outputBufferIndex++;
 				precedingCharIsALetter = true;

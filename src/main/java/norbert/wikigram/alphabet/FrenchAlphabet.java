@@ -46,7 +46,7 @@ public class FrenchAlphabet implements Alphabet {
 	 *         alphabet, <code>false</code> otherwise.
 	 */
 	@Override
-	public boolean constains(char c) {
+	public boolean contains(char c) {
 		return ALPHABET.contains(c);
 	}
 }

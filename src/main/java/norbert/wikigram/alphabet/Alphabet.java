@@ -30,5 +30,5 @@ public interface Alphabet {
 	 * @return <code>true</code> if the given character belongs to the alphabet,
 	 *         <code>false</code> otherwise.
 	 */
-	public boolean constains(char c);
+	public boolean contains(char c);
 }
