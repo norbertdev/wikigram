@@ -33,6 +33,7 @@ public class ToLowerLetterWriter extends Writer {
 
 	@Override
 	public void close() throws IOException {
+		flush();
 		out.close();
 	}
 
@@ -42,12 +43,13 @@ public class ToLowerLetterWriter extends Writer {
 	}
 
 	@Override
-	public void write(char cbuf[], int off, int len) throws IOException {
-		char[] outputBuffer = new char[len];
-
-		for (int index = off; index < len; index++) {
-			outputBuffer[index] = Character.toLowerCase(cbuf[index]);
+	public void write(char buffer[], int offset, int length) throws IOException {
+		for (int index = offset; index < offset + length; index++) {
+			char c = buffer[index];
+			if (!Character.isLowerCase(c)) {
+				buffer[index] = Character.toLowerCase(c);
+			}
 		}
-		out.write(outputBuffer, 0, len);
+		out.write(buffer, offset, length);
 	}
 }
