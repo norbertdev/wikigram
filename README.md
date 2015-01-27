@@ -28,7 +28,7 @@ Build WikiGram
 ```sh
 git clone http://github.com/norbertdev/wikigram.git
 cd wikigram
-mvn package assembly:single
+mvn package
 ```
 
 
@@ -37,7 +37,7 @@ Start WikiGram
 
 * Run the script, give the dump as parameter. For example:
 ```sh
-./wikigram.sh frwiki-latest-pages-articles-multistream.xml.bz2
+target/appassembler/bin/wikigram frwiki-latest-pages-articles-multistream.xml.bz2
 ```
 
 
