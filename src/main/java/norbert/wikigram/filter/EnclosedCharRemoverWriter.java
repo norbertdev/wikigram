@@ -54,102 +54,39 @@ public class EnclosedCharRemoverWriter extends Writer {
 		out.flush();
 	}
 
-	// FIXME: remove this debug method (optimized)
 	@Override
-	public void write(char cbuf[], int off, int len) throws IOException {
-		// char[] outputBuffer = new char[len];
-		int outputBufferIndex = off;
-		int maximumIndex = len + off;
-
-		if (relativeOpeningLinkCounter == 0) {
-			while (outputBufferIndex < maximumIndex
-					&& cbuf[outputBufferIndex] != openingChar) {
-				outputBufferIndex++;
-			}
-		}
-
-		for (int index = outputBufferIndex; index < maximumIndex; index++) {
-			char currentChar = cbuf[index];
-
-			if (currentChar == openingChar) {
-				relativeOpeningLinkCounter++;
-			} else if (currentChar == closingChar) {
-				if (relativeOpeningLinkCounter != 0) {
-					relativeOpeningLinkCounter--;
+	public void write(char buffer[], int offset, int length) throws IOException {
+		int index = offset;
+		while (index < length + offset) {
+			if (relativeOpeningLinkCounter == 0) {
+				// do write
+				boolean loop = true;
+				int start = index;
+				while (index < length + offset && loop) {
+					char c = buffer[index];
+					if (c == openingChar) {
+						relativeOpeningLinkCounter = 1;
+						loop = false;
+						break;
+					} else {
+						index++;
+					}
 				}
-			} else if (relativeOpeningLinkCounter == 0) {
-				// outputBuffer[outputBufferIndex] = currentChar;
-				cbuf[outputBufferIndex] = cbuf[index];
-				outputBufferIndex++;
-			}
-		}
-		out.write(cbuf, off, outputBufferIndex - off);
-	}
-
-	/*
-	 * @Override public void write(char cbuf[], int off, int len) throws
-	 * IOException { char[] outputBuffer = new char[len]; int nbOfCharsToCopy =
-	 * 0; int dstStartingIndex = 0;
-	 *
-	 * for (int index = off; index < len; index++) { char currentChar =
-	 * cbuf[index];
-	 *
-	 * if (currentChar == openingChar) { if (relativeOpeningLinkCounter == 0) {
-	 * System.arraycopy(cbuf, index - nbOfCharsToCopy, outputBuffer,
-	 * dstStartingIndex, nbOfCharsToCopy); dstStartingIndex += nbOfCharsToCopy;
-	 * nbOfCharsToCopy = 0; } relativeOpeningLinkCounter++; } else if
-	 * (currentChar == closingChar) { if (relativeOpeningLinkCounter != 0) {
-	 * relativeOpeningLinkCounter--; } } else if (relativeOpeningLinkCounter ==
-	 * 0) { nbOfCharsToCopy++; } } System.arraycopy(cbuf, len - nbOfCharsToCopy,
-	 * outputBuffer, dstStartingIndex, nbOfCharsToCopy);
-	 *
-	 * out.write(outputBuffer, 0, dstStartingIndex + nbOfCharsToCopy); }
-	 */
-
-	// @Override
-	public void writeOrig(char cbuf[], int off, int len) throws IOException {
-		char[] outputBuffer = new char[len];
-		int outputBufferIndex = 0;
-
-		for (int index = off; index < len + off; index++) {
-			char currentChar = cbuf[index];
-
-			if (currentChar == openingChar) {
-				relativeOpeningLinkCounter++;
-			} else if (currentChar == closingChar) {
-				if (relativeOpeningLinkCounter != 0) {
-					relativeOpeningLinkCounter--;
+				out.write(buffer, start, index - start);
+				index++;
+			} else {
+				// do not write
+				while (index < length + offset
+						&& relativeOpeningLinkCounter != 0) {
+					char c = buffer[index];
+					if (c == openingChar) {
+						relativeOpeningLinkCounter++;
+					} else if (c == closingChar) {
+						relativeOpeningLinkCounter--;
+					}
+					index++;
 				}
-			} else if (relativeOpeningLinkCounter == 0) {
-				outputBuffer[outputBufferIndex] = currentChar;
-				outputBufferIndex++;
 			}
 		}
-		out.write(outputBuffer, 0, outputBufferIndex);
-	}
-
-	// FIXME: remove this debug method
-	// @Override
-	public void writeSameBuffer(char cbuf[], int off, int len)
-			throws IOException {
-		// char[] outputBuffer = new char[len];
-		int outputBufferIndex = off;
-
-		for (int index = off; index < len + off; index++) {
-			char currentChar = cbuf[index];
-
-			if (currentChar == openingChar) {
-				relativeOpeningLinkCounter++;
-			} else if (currentChar == closingChar) {
-				if (relativeOpeningLinkCounter != 0) {
-					relativeOpeningLinkCounter--;
-				}
-			} else if (relativeOpeningLinkCounter == 0) {
-				// outputBuffer[outputBufferIndex] = currentChar;
-				cbuf[outputBufferIndex] = cbuf[index];
-				outputBufferIndex++;
-			}
-		}
-		out.write(cbuf, off, outputBufferIndex - off);
 	}
 }
