@@ -147,6 +147,7 @@ public class NgramCounterWriter extends Writer {
 	public void close() throws IOException {
 		flush();
 		printSummary();
+		System.exit(0);
 		// TODO: the thread must be shut down
 	}
 
