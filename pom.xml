@@ -7,7 +7,6 @@
 	<artifactId>wikigram</artifactId>
 	<groupId>norbert</groupId>
 	<version>2015.01.18</version>
-	<packaging>jar</packaging>
 
 	<build>
 		<plugins>
@@ -49,7 +48,7 @@
 	</dependencies>
 
 	<description>WikiGram aims to compute the most used trigrams in the Wikipedia articles.</description>
-	<url>http://gitorious.org/wikigram</url>
+	<url>https://github.com/norbertdev/wikigram</url>
 	<licenses>
 		<license>
 			<name>GNU GPL 3 or any later version</name>

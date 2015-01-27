@@ -10,7 +10,7 @@ How to start WikiGram?
 Download a Wikipedia dump
 -------------------------
 
-* The dumps are downloadable at http://dumps.wikimedia.org/. For example:
+* The dumps are provided by [Wikimedia](http://dumps.wikimedia.org/). For example:
 ```sh
 wget https://dumps.wikimedia.org/frwiki/latest/frwiki-latest-pages-articles-multistream.xml.bz2
 ```
@@ -44,4 +44,4 @@ Start WikiGram
 License
 =======
 
-[GNU GPL 3](https://www.gnu.org/licenses/gpl-3.0.html) or of any later version published by the Free Software Foundation. See also the LICENSE file.
+[GNU GPL 3](https://www.gnu.org/licenses/gpl-3.0.html) or any later version published by the Free Software Foundation.
