@@ -32,7 +32,7 @@ public class RedirectionRemoverWriter extends Writer {
 	private final char[] buffer;
 	private int bufferIndex;
 	private boolean canWrite;
-	private Writer out;
+	private final Writer out;
 
 	public RedirectionRemoverWriter(Writer out) {
 		this.out = out;

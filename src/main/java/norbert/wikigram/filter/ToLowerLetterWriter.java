@@ -25,7 +25,7 @@ import java.io.Writer;
  * {@link java.lang.Character#toLowerCase(char)} method is used.
  */
 public class ToLowerLetterWriter extends Writer {
-	private Writer out;
+	private final Writer out;
 
 	public ToLowerLetterWriter(Writer out) {
 		this.out = out;

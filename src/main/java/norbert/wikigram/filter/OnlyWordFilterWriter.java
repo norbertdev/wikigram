@@ -29,8 +29,8 @@ import norbert.wikigram.alphabet.Alphabet;
  * separated by a space. For example, it converts "<a1   !bc2d" to "a bc d".
  */
 public class OnlyWordFilterWriter extends Writer {
-	private Alphabet alphabet;
-	private Writer out;
+	private final Alphabet alphabet;
+	private final Writer out;
 	private boolean precedingCharIsALetter;
 
 	public OnlyWordFilterWriter(Writer out, Alphabet alphabet) {
@@ -43,7 +43,6 @@ public class OnlyWordFilterWriter extends Writer {
 	public void close() throws IOException {
 		flush();
 		out.close();
-
 	}
 
 	@Override

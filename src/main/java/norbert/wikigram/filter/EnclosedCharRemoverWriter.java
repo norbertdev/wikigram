@@ -29,7 +29,7 @@ import java.io.Writer;
 public class EnclosedCharRemoverWriter extends Writer {
 	private final char closingChar;
 	private final char openingChar;
-	private Writer out;
+	private final Writer out;
 	private int relativeOpeningLinkCounter;
 
 	public EnclosedCharRemoverWriter(Writer out, char openingChar,

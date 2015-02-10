@@ -27,7 +27,7 @@ import java.util.Map.Entry;
  *
  * The characters are given through the {@link #newChar(char)} method. The begin
  * of a new word is notified by calling the {@link #newWord()} method. The most
- * frequent ngrams are retrieve through the {@link #getMostFrequent()} method.
+ * frequent ngrams are retrieved through the {@link #getMostFrequent()} method.
  */
 public class NgramCounter {
 	private final NgramGenerator ngram;

@@ -30,6 +30,97 @@ import java.io.Writer;
  * statistics.
  */
 public class NgramCounterWriter extends Writer {
+	private class PerformanceEvaluationRunnable implements Runnable {
+		@Override
+		public void run() {
+			int iterationNumber = 1;
+			int lastArticleCounter = articleCounter;
+			while (true) {
+				try {
+					Thread.sleep(10000);
+					if (displayStatistics) {
+						System.out.println(iterationNumber + ". "
+								+ "article processed: avg="
+								+ articleCounter / (iterationNumber * 10)
+								+ ", last="
+								+ (articleCounter - lastArticleCounter)
+								+ " (total: article=" + articleCounter
+								+ ", word=" + wordCounter + ")");
+						lastArticleCounter = articleCounter;
+					}
+					iterationNumber++;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private class UserInputRunnable implements Runnable {
+		@Override
+		public void run() {
+			try {
+				char c;
+				do {
+					c = (char) System.in.read();
+					switch (c) {
+					case 'a':
+						System.out.println("article = " + articleCounter);
+						break;
+
+					case 'w':
+						System.out.println("word = " + wordCounter);
+						break;
+
+					case 'l':
+						System.out.println("letter = " + letterCounter);
+						break;
+
+					case 'd':
+						displayCurrentResult = true;
+						break;
+
+					case 'q':
+						printSummary();
+						System.exit(0);
+						break;
+
+					case 'h':
+						System.out
+								.println("a: show the number of article processed.");
+						System.out
+								.println("w: show the number of word processed.");
+						System.out
+								.println("l: show the number of letter processed.");
+						System.out
+								.println("d: show a summary of article, word and letter processed, and the most used trigrams.");
+						System.out
+								.println("s: activate or deactivate statistics. Show every 10 seconds the current statistics.");
+						System.out.println("h: show this help.");
+						System.out.println("q: quit the program.");
+						break;
+
+					case 's':
+						displayStatistics = !displayStatistics;
+						if (displayStatistics) {
+							System.out.println("display statistics: on");
+						} else {
+							System.out.println("display statistics: off");
+						}
+						break;
+
+					default:
+						break;
+					}
+					System.out.flush();
+				} while (true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	private int articleCounter;
 	private final NgramCounter counter;
 	private boolean displayCurrentResult;
@@ -47,98 +138,11 @@ public class NgramCounterWriter extends Writer {
 		displayCurrentResult = false;
 		displayStatistics = false;
 
-		userInputThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					char c;
-					do {
-						c = (char) System.in.read();
-						switch (c) {
-						case 'a':
-							System.out.println("article = " + articleCounter);
-							break;
-
-						case 'w':
-							System.out.println("word = " + wordCounter);
-							break;
-
-						case 'l':
-							System.out.println("letter = " + letterCounter);
-							break;
-
-						case 'd':
-							displayCurrentResult = true;
-							break;
-
-						case 'q':
-							printSummary();
-							System.exit(0);
-							break;
-
-						case 'h':
-							System.out
-									.println("a: show the number of article processed.");
-							System.out
-									.println("w: show the number of word processed.");
-							System.out
-									.println("l: show the number of letter processed.");
-							System.out
-									.println("d: show a summary of article, word and letter processed, and the most used trigrams.");
-							System.out
-									.println("s: activate or deactivate statistics. Show every 10 seconds the current statistics.");
-							System.out.println("h: show this help.");
-							System.out.println("q: quit the program.");
-							break;
-
-						case 's':
-							displayStatistics = !displayStatistics;
-							if (displayStatistics) {
-								System.out.println("display statistics: on");
-							} else {
-								System.out.println("display statistics: off");
-							}
-							break;
-
-						default:
-							break;
-						}
-						System.out.flush();
-					} while (true);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		userInputThread = new Thread(new UserInputRunnable());
 		userInputThread.start();
 
-		Thread performanceEvalution = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				int iterationNumber = 1;
-				int lastArticleCounter = articleCounter;
-				while (true) {
-					try {
-						Thread.sleep(10000);
-						if (displayStatistics) {
-							System.out.println(iterationNumber + ". "
-									+ "article processed: avg="
-									+ articleCounter / (iterationNumber * 10)
-									+ ", last="
-									+ (articleCounter - lastArticleCounter)
-									+ " (total: article=" + articleCounter
-									+ ", word=" + wordCounter + ")");
-							lastArticleCounter = articleCounter;
-						}
-						iterationNumber++;
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		performanceEvalution.start();
+		Thread performanceEvaluation = new Thread(new PerformanceEvaluationRunnable());
+		performanceEvaluation.start();
 
 		displayUsage();
 	}
