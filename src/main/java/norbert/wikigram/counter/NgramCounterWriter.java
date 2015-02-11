@@ -111,6 +111,8 @@ public class NgramCounterWriter extends Writer {
     }
   }
 
+  private static final int MAXIMUM_NGRAMS_TO_DISPLAY = 256;
+
   private int articleCounter;
   private final NgramCounter counter;
   private boolean displayCurrentResult;
@@ -159,7 +161,7 @@ public class NgramCounterWriter extends Writer {
   private void printSummary() {
     System.out.println("article = " + articleCounter + ", word = " + wordCounter + ", letter = "
         + letterCounter);
-    System.out.println(counter.getMostFrequent());
+    System.out.println(counter.getMostFrequent(MAXIMUM_NGRAMS_TO_DISPLAY));
   }
 
   @Override

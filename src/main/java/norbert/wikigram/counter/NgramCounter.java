@@ -43,15 +43,15 @@ public class NgramCounter {
    *
    * The returned list can be empty. <code>null</code> is never returned.
    *
+   * @param maxElement the maximum number of ngrams in the returned list
    * @return ngrams ordered by frequency.
    */
-  public synchronized List<String> getMostFrequent() {
-    NgramsByFrequency nbf = new NgramsByFrequency();
+  public synchronized List<String> getMostFrequent(int maxElement) {
+    MostFrequentNgramSet set = new MostFrequentNgramSet(maxElement);
     for (Entry<String, Long> numberOfTuples : numberOfNgrams.entrySet()) {
-      nbf.update(numberOfTuples.getKey(), numberOfTuples.getValue());
+      set.add(numberOfTuples.getKey(), numberOfTuples.getValue());
     }
-
-    return nbf.getMostFrequentNgrams();
+    return set.generateList();
   }
 
   /**
