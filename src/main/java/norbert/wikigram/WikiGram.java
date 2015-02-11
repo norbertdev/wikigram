@@ -42,6 +42,7 @@ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 public class WikiGram {
   // size of the buffer: 1 mega
   private final static int BUFFER_SIZE = (int) Math.pow(2, 20);
+  private static final int DEFAULT_NGRAM_LENGTH = 3;
 
   public static void count(String filename) throws FileNotFoundException {
     FileInputStream fileStream = null;
@@ -53,7 +54,7 @@ public class WikiGram {
       bufferedStream = new BufferedInputStream(fileStream, BUFFER_SIZE);
       decompressorStream = new BZip2CompressorInputStream(bufferedStream, true);
 
-      Writer ngramCounterWriter = new NgramCounterWriter();
+      Writer ngramCounterWriter = new NgramCounterWriter(DEFAULT_NGRAM_LENGTH);
       Writer onlyWordFilterWriter =
           new OnlyWordFilterWriter(ngramCounterWriter, new FrenchAlphabet());
       Writer redirectionRemoverWriter = new RedirectionRemoverWriter(onlyWordFilterWriter);

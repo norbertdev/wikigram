@@ -32,9 +32,9 @@ public class NgramCounter {
   private final NgramGenerator ngram;
   private final Map<String, Integer> numberOfNgrams;
 
-  public NgramCounter() {
+  public NgramCounter(int ngramSize) {
     numberOfNgrams = new HashMap<>();
-    ngram = new NgramGenerator();
+    ngram = new NgramGenerator(ngramSize);
   }
 
   /**

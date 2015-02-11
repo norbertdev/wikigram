@@ -119,8 +119,8 @@ public class NgramCounterWriter extends Writer {
   private final Thread userInputThread;
   private int wordCounter;
 
-  public NgramCounterWriter() {
-    counter = new NgramCounter();
+  public NgramCounterWriter(int ngramLength) {
+    counter = new NgramCounter(ngramLength);
 
     letterCounter = 0;
     wordCounter = 0;

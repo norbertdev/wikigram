@@ -32,16 +32,11 @@ import norbert.wikigram.utils.LoopingIndex;
  * For example, for a length of 2, putting 'a', 'b' and 'c' results in "bc".
  */
 public class NgramGenerator {
-  private static final int DEFAULT_LENGTH = 3;
   private final char[] currentTuple;
   private final LoopingIndex endIndex;
   private final int length;
   private int size;
   private final LoopingIndex startIndex;
-
-  public NgramGenerator() {
-    this(DEFAULT_LENGTH);
-  }
 
   /**
    * Constructs a generator that will generate strings of the given number of characters.
