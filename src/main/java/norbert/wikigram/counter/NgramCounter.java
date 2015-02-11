@@ -30,7 +30,7 @@ import java.util.Map.Entry;
  */
 public class NgramCounter {
   private final NgramGenerator ngram;
-  private final Map<String, Integer> numberOfNgrams;
+  private final Map<String, Long> numberOfNgrams;
 
   public NgramCounter(int ngramSize) {
     numberOfNgrams = new HashMap<>();
@@ -47,11 +47,18 @@ public class NgramCounter {
    */
   public synchronized List<String> getMostFrequent() {
     NgramsByFrequency nbf = new NgramsByFrequency();
-    for (Entry<String, Integer> numberOfTuples : numberOfNgrams.entrySet()) {
+    for (Entry<String, Long> numberOfTuples : numberOfNgrams.entrySet()) {
       nbf.update(numberOfTuples.getKey(), numberOfTuples.getValue());
     }
 
     return nbf.getMostFrequentNgrams();
+  }
+
+  /**
+   * Returns the current frequency of the given ngram.
+   */
+  public long getFrenquency(String ngram) {
+    return numberOfNgrams.get(ngram);
   }
 
   /**
@@ -63,9 +70,9 @@ public class NgramCounter {
     ngram.putChar(c);
     String s = ngram.getString();
     if (s != null) {
-      Integer currentNumber = numberOfNgrams.get(s);
+      Long currentNumber = numberOfNgrams.get(s);
       if (currentNumber == null) {
-        currentNumber = 1;
+        currentNumber = 1L;
       } else {
         currentNumber++;
       }

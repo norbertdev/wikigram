@@ -37,10 +37,10 @@ public class NgramsByFrequency {
    * Two ngrams are equal if their texts are equal.
    */
   private class NgramAndFrequency implements Comparable<NgramAndFrequency> {
-    private final int frequency;
+    private final long frequency;
     private final String ngram;
 
-    public NgramAndFrequency(String ngram, int frequency) {
+    public NgramAndFrequency(String ngram, Long frequency) {
       this.ngram = ngram;
       this.frequency = frequency;
     }
@@ -50,8 +50,16 @@ public class NgramsByFrequency {
       if (this.equals(nf)) {
         return 0;
       }
-      int difference = frequency - nf.getFrequency();
-      return (difference == 0) ? ngram.compareTo(nf.getNgram()) : difference;
+
+      long otherFrequency = nf.getFrequency();
+
+      if (frequency < otherFrequency) {
+        return -1;
+      } else if (otherFrequency < frequency) {
+        return 1;
+      } else {
+        return ngram.compareTo(nf.getNgram());
+      }
     }
 
     @Override
@@ -63,7 +71,7 @@ public class NgramsByFrequency {
       return ngram.equals(ft.getNgram());
     }
 
-    public int getFrequency() {
+    public long getFrequency() {
       return frequency;
     }
 
@@ -92,7 +100,7 @@ public class NgramsByFrequency {
    */
   public NgramsByFrequency(int maximumNgrams) {
     sortedNgrams = new TreeSet<NgramAndFrequency>();
-    sortedNgrams.add(new NgramAndFrequency("dummytuple", -1));
+    sortedNgrams.add(new NgramAndFrequency("dummytuple", -1L));
     this.maximumNgrams = maximumNgrams;
   }
 
@@ -119,7 +127,7 @@ public class NgramsByFrequency {
    * @param ngram the ngram to add
    * @param frequency the frequency of the ngram
    */
-  public void update(String ngram, Integer frequency) {
+  public void update(String ngram, Long frequency) {
     if (sortedNgrams.first().getFrequency() < frequency) {
       NgramAndFrequency newFrequencyNgram = new NgramAndFrequency(ngram, frequency);
       sortedNgrams.remove(newFrequencyNgram);
