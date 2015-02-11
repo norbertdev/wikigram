@@ -1,19 +1,18 @@
 /*
  * This file is part of WikiGram.
+ *
  * Copyright 2015 Norbert
  *
- * WikiGram is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * WikiGram is free software: you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * WikiGram is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ * WikiGram is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with WikiGram. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with WikiGram. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package norbert.wikigram.alphabet;
 
@@ -21,14 +20,13 @@ package norbert.wikigram.alphabet;
  * This interface provides a way to detect if an alphabet contains a character.
  */
 public interface Alphabet {
-	/**
-	 * Returns <code>true</code> if the given character belongs to the alphabet,
-	 * <code>false</code> otherwise.
-	 *
-	 * @param c
-	 *            character to test
-	 * @return <code>true</code> if the given character belongs to the alphabet,
-	 *         <code>false</code> otherwise.
-	 */
-	public boolean contains(char c);
+  /**
+   * Returns <code>true</code> if the given character belongs to the alphabet, <code>false</code>
+   * otherwise.
+   *
+   * @param c character to test
+   * @return <code>true</code> if the given character belongs to the alphabet, <code>false</code>
+   *         otherwise.
+   */
+  public boolean contains(char c);
 }
